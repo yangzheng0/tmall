@@ -1,17 +1,17 @@
 package tmall.bean;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class Product {
 	private String name;
 	private int id;
-	private String subTimtle;
+	private String subTitle;
 	private float orignalPrice;
 	private float promotePrice;
 	private int stock;
 	private Date createDate;
-	private Category categore;
+	private Category category;
 	private ProductImage firstProductImage;
 	private List<ProductImage> productImages;
 	private List<ProductImage> productSingleImages;
@@ -30,11 +30,11 @@ public class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getSubTimtle() {
-		return subTimtle;
+	public String getSubTitle() {
+		return subTitle;
 	}
-	public void setSubTimtle(String subTimtle) {
-		this.subTimtle = subTimtle;
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
 	}
 	public float getOrignalPrice() {
 		return orignalPrice;
@@ -60,11 +60,11 @@ public class Product {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public Category getCategore() {
-		return categore;
+	public Category getCategory() {
+		return category;
 	}
-	public void setCategore(Category categore) {
-		this.categore = categore;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	public ProductImage getFirstProductImage() {
 		return firstProductImage;

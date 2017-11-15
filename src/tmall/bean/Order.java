@@ -1,6 +1,6 @@
 package tmall.bean;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -25,22 +25,22 @@ public class Order {
 		String desc = "Î´Öª";
 		switch (status) {
 		// case OrderDAO.waitPay:
-		// desc="´ý¸¶¿î";
+		// desc="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		// break;
 		// case OrderDAO.waitDelivery:
-		// desc="´ý·¢»õ";
+		// desc="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		// break;
 		// case OrderDAO.waitConfirm:
-		// desc="´ýÊÕ»õ";
+		// desc="ï¿½ï¿½ï¿½Õ»ï¿½";
 		// break;
 		// case OrderDAO.waitReview:
-		// desc="µÈÆÀ¼Û";
+		// desc="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		// break;
 		// case OrderDAO.finish:
-		// desc="Íê³É";
+		// desc="ï¿½ï¿½ï¿½";
 		// break;
 		// case OrderDAO.delete:
-		// desc="„h³ý";
+		// desc="ï¿½hï¿½ï¿½";
 		// break;
 		// default:
 		// desc="Î´Öª";

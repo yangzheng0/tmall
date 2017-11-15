@@ -3,6 +3,7 @@ package tmall.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import tmall.util.DBUtil;
 
 public class PropertyDAO {
 
-	// »ñÈ¡Ò»¸öÉÌÆ·µÄËùÓĞÊôĞÔ
+	//è·å–å±æ€§æ€»æ•°
 	public int getTotal(int cid) {
 		int total = 0;
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement()) {
@@ -25,33 +26,33 @@ public class PropertyDAO {
 				total = rs.getInt(1);
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return total;
 	}
 
-	// ¸ù¾İÉÌÆ·Ìí¼ÓÊôĞÔ
+	//æ·»åŠ å±æ€§
 	public void add(Property property) {
 		String sql = "insert into Property values(null,?,?)";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 
-			ps.setInt(1, property.getCategory().getId());// ·ÖÀàµÄid
-			ps.setString(2, property.getName());// ÊôĞÔÃû³Æ
+			ps.setInt(1, property.getCategory().getId());// è®¾ç½®id
+			ps.setString(2, property.getName());// è®¾ç½®åå­—
 			ps.execute();
 
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
-				int id = rs.getInt(1);// ÊôĞÔµÄid
+				int id = rs.getInt(1);// è®¾ç½®id
 				property.setId(id);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// ¸üĞÂÊôĞÔ
+	// æ›´æ–°ç”¨æˆ·
 	public void update(Property property) {
 		String sql = "update Property set cid = ?,name = ?,where id = ?";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
@@ -60,22 +61,22 @@ public class PropertyDAO {
 			ps.setInt(3, property.getId());
 
 			ps.execute();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// É¾³ıÊôĞÔ
+	// åˆ é™¤ç”¨æˆ·
 	public void delete(int id) {
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement()) {
 			String sql = "delete from Property where id =" + id;
 			s.execute(sql);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// ¸ù¾İÃû³Æ ·ÖÀàid»ñÈ¡ÊôĞÔ
+	// æ ¹æ®åç§° idæŸ¥è¯¢å±æ€§
 	public Property get(String name, int cid) {
 		Property property = null;
 		String sql = "select * from Property where name = ? and cid = ? ";
@@ -92,14 +93,14 @@ public class PropertyDAO {
 				property.setCategory(category);
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return property;
 
 	}
 
-	// ¸ù¾İid»ñÈ¡ÊôĞÔ
+	// æ ¹æ®è‡ªèº«idæŸ¥è¯¢å±æ€§
 	public Property get(int id) {
 		Property property = new Property();
 
@@ -109,23 +110,28 @@ public class PropertyDAO {
 			ResultSet rs = s.executeQuery(sql);
 
 			if (rs.next()) {
-
+				String name = rs.getString("name");
+                int cid = rs.getInt("cid");
+                property.setName(name);
+                Category category = new CategoryDAO().get(cid);
+                property.setCategory(category);
+                property.setId(id);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return property;
 
 	}
 
-	// ¸ù¾İ·ÖÀàidÁĞ³öÊôĞÔ
+	// æŸ¥æ‰¾å±æ€§åˆ—è¡¨
 	public List<Property> list(int cid) {
 		return list(cid, 0, Short.MAX_VALUE);
 
 	}
 
-	// ¸ù¾İ·ÖÀàid ¿ªÊ¼Î»ÖÃ ÊıÁ¿»ñÈ¡ÊôĞÔÁĞ±í
+	// æŸ¥æ‰¾å±æ€§ä¸€æ®µåˆ—è¡¨
 	public List<Property> list(int cid, int start, int count) {
 		List<Property> properties = new ArrayList<Property>();
 
@@ -149,7 +155,7 @@ public class PropertyDAO {
 				
 				properties.add(property);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return properties;

@@ -30,19 +30,19 @@ public class CategoryDAO {
         return total;
     }
   
-    public void add(Category bean) {
+    public void add(Category category) {
   
         String sql = "insert into category values(null,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
   
-            ps.setString(1, bean.getName());
+            ps.setString(1, category.getName());
   
             ps.execute();
   
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 int id = rs.getInt(1);
-                bean.setId(id);
+                category.setId(id);
             }
         } catch (SQLException e) {
   
@@ -50,13 +50,13 @@ public class CategoryDAO {
         }
     }
   
-    public void update(Category bean) {
+    public void update(Category category) {
   
         String sql = "update category set name= ? where id = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
   
-            ps.setString(1, bean.getName());
-            ps.setInt(2, bean.getId());
+            ps.setString(1, category.getName());
+            ps.setInt(2, category.getId());
   
             ps.execute();
   
@@ -82,7 +82,7 @@ public class CategoryDAO {
     }
   
     public Category get(int id) {
-        Category bean = null;
+        Category category = null;
   
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
   
@@ -91,17 +91,17 @@ public class CategoryDAO {
             ResultSet rs = s.executeQuery(sql);
   
             if (rs.next()) {
-                bean = new Category();
+                category = new Category();
                 String name = rs.getString(2);
-                bean.setName(name);
-                bean.setId(id);
+                category.setName(name);
+                category.setId(id);
             }
   
         } catch (SQLException e) {
   
             e.printStackTrace();
         }
-        return bean;
+        return category;
     }
   
     public List<Category> list() {
@@ -109,7 +109,7 @@ public class CategoryDAO {
     }
   
     public List<Category> list(int start, int count) {
-        List<Category> beans = new ArrayList<Category>();
+        List<Category> categorys = new ArrayList<Category>();
   
         String sql = "select * from Category order by id desc limit ?,? ";
   
@@ -121,18 +121,18 @@ public class CategoryDAO {
             ResultSet rs = ps.executeQuery();
   
             while (rs.next()) {
-                Category bean = new Category();
+                Category category = new Category();
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
-                bean.setId(id);
-                bean.setName(name);
-                beans.add(bean);
+                category.setId(id);
+                category.setName(name);
+                categorys.add(category);
             }
         } catch (SQLException e) {
   
             e.printStackTrace();
         }
-        return beans;
+        return categorys;
     }
   
 }

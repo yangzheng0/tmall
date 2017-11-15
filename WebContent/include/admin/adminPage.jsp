@@ -1,7 +1,3 @@
-<!-- 模仿天猫整站j2ee 教程 为how2j.cn 版权所有-->
-<!-- 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关-->
-<!-- 供购买者学习，请勿私自传播，否则自行承担相关法律责任-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
@@ -31,14 +27,14 @@ $(function(){
 
     <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
     
-    	
+    	<c:if test="${status.count*page.count-page.start<=20 && status.count*page.count-page.start>=-10}">
 		    <li <c:if test="${status.index*page.count==page.start}">class="disabled"</c:if>>
 		    	<a  
 		    	href="?page.start=${status.index*page.count}${page.param}"
 		    	<c:if test="${status.index*page.count==page.start}">class="current"</c:if>
 		    	>${status.count}</a>
 		    </li>
-		
+		</c:if>
     </c:forEach>
 
     <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
