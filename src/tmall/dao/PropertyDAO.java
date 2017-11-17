@@ -54,12 +54,11 @@ public class PropertyDAO {
 
 	// 更新用户
 	public void update(Property property) {
-		String sql = "update Property set cid = ?,name = ?,where id = ?";
+		String sql = "update Property set cid = ?,name = ? where id = ?";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setInt(1, property.getCategory().getId());
 			ps.setString(2, property.getName());
 			ps.setInt(3, property.getId());
-
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,8 +80,8 @@ public class PropertyDAO {
 		Property property = null;
 		String sql = "select * from Property where name = ? and cid = ? ";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-			ps.setString(1, property.getName());
-			ps.setInt(2, property.getCategory().getId());
+			ps.setString(1, name);
+			ps.setInt(2, cid);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				property = new Property();
@@ -135,7 +134,7 @@ public class PropertyDAO {
 	public List<Property> list(int cid, int start, int count) {
 		List<Property> properties = new ArrayList<Property>();
 
-		String sql = "select * from Property where cid = ? order by id desc = limit ?,?";
+		String sql = "select * from Property where cid = ? order by id desc limit ?,?";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setInt(1, cid);

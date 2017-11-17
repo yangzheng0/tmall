@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
  
 public class DBUtil {
-    static String ip = "192.168.12.179";
+    static String ip = "192.168.12.153";
     static int port = 3306;
     static String database = "tmall";
     static String encoding = "UTF-8";
