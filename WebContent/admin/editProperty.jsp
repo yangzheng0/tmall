@@ -10,9 +10,9 @@
 
 <div class="workingArea">
 	<ol class="breadcrumb">
-		<li><a href="admin_category_list">所有分类</a></li>
-		<li><a href="admin_property_list?cid=${p.category.id}">${p.category.name}</a></li>
-		<li class="active">编辑属性</li>
+	  <li><a href="admin_category_list">所有分类</a></li>
+	  <li><a href="admin_property_list?cid=${p.category.id}">${p.category.name}</a></li>
+	  <li class="active">编辑属性</li>
 	</ol>
 
 	<div class="panel panel-warning editDiv">
@@ -29,7 +29,7 @@
 						<td colspan="2" align="center">
 						<input type="hidden" name="id" value="${p.id}">
 						<input type="hidden" name="cid" value="${p.category.id}">
-							<button type="submit" class="btn btn-success">提 交</button></td>
+						<button type="submit" class="btn btn-success">提 交</button></td>
 					</tr>
 				</table>
 			</form>

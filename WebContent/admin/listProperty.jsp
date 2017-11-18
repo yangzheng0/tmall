@@ -22,9 +22,9 @@
 <div class="workingArea">
 
 	<ol class="breadcrumb">
-		<li><a href="admin_category_list">所有分类</a></li>
-		<li><a href="admin_property_list?cid=${c.id}">${c.name}</a></li>
-		<li class="active">属性管理</li>
+	  <li><a href="admin_category_list">所有分类</a></li>
+	  <li><a href="admin_property_list?cid=${c.id}">${c.name}</a></li>
+	  <li class="active">属性管理</li>
 	</ol>
 
 
