@@ -92,6 +92,16 @@
         <filter-name>BackServletFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <filter>
+        <filter-name>ForeAuthFilter</filter-name>
+        <filter-class>tmall.filter.ForeAuthFilter</filter-class>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>ForeAuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>      
 
     <filter>
         <filter-name>ForeServletFilter</filter-name>
@@ -104,5 +114,7 @@
 		<dispatcher>REQUEST</dispatcher>        
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+  
         
 </web-app>

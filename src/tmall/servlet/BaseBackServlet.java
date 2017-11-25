@@ -1,3 +1,9 @@
+/**
+* 模仿天猫整站j2ee 教程 为how2j.cn 版权所有
+* 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关
+* 供购买者学习，请勿私自传播，否则自行承担相关法律责任
+*/	
+
 package tmall.servlet;
 
 
@@ -85,36 +91,42 @@ public abstract class BaseBackServlet extends HttpServlet {
 	}
 	public InputStream parseUpload(HttpServletRequest request, Map<String, String> params) {
 			InputStream is =null;
-		try {
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			// 设置上传文件的大小限制为10M
-			factory.setSizeThreshold(1024 * 10240);
+			try {
+	            DiskFileItemFactory factory = new DiskFileItemFactory();
+	            ServletFileUpload upload = new ServletFileUpload(factory);
+	            // 设置上传文件的大小限制为10M
+	            factory.setSizeThreshold(1024 * 10240);
 	             
-			List items = upload.parseRequest(request);
-			Iterator iter = items.iterator();
-			while (iter.hasNext()) {
-				FileItem item = (FileItem) iter.next();
-				if (!item.isFormField()) {
-					// item.getInputStream() 获取上传文件的输入流
-					is = item.getInputStream();
-				} else {
-					String paramName = item.getFieldName();
-					String paramValue = item.getString();
-					paramValue = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");
-					params.put(paramName, paramValue);
-				}
-			}
+	            List items = upload.parseRequest(request);
+	            Iterator iter = items.iterator();
+	            while (iter.hasNext()) {
+	                FileItem item = (FileItem) iter.next();
+	                if (!item.isFormField()) {
+	                    // item.getInputStream() 获取上传文件的输入流
+	                    is = item.getInputStream();
+	                } else {
+	                	String paramName = item.getFieldName();
+	                	String paramValue = item.getString();
+	                	paramValue = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");
+	                	params.put(paramName, paramValue);
+	                }
+	            }
 	             
 	
 	             
-		} catch (Exception e) {
-			e.printStackTrace();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+			return is;
 		}
-		return is;
-	}
 	
 	 
 	
 
 }
+
+/**
+* 模仿天猫整站j2ee 教程 为how2j.cn 版权所有
+* 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关
+* 供购买者学习，请勿私自传播，否则自行承担相关法律责任
+*/	
